@@ -15,7 +15,6 @@ const login = async (req, res) => {
   if (!match) {
     return res.status(401).json({ message: "Unauthorized" });
   }
-  console.log();
 
   const accessToken = jwt.sign(
     {
@@ -23,20 +22,20 @@ const login = async (req, res) => {
         email: foundUser.email,
       },
     },
-    process.env.VITE_ACCESS_TOKEN_SECRET,
+    process.env.ACCESS_TOKEN_SECRET,
     { expiresIn: "10s" }
   );
   const refreshToken = jwt.sign(
     {
       email: foundUser.username,
     },
-    process.env.VITE_REFRESH_TOKEN_SECRET,
+    process.env.REFRESH_TOKEN_SECRET,
     { expiresIn: "1d" }
   );
 
   res.cookie("jwt", refreshToken, {
     httpOnly: true, // accessible only by web server
-    secure: true, // https
+    // secure: true, // https
     sameSite: "None", // cross-site cookie
     maxAge: 7 * 24 * 60 * 60 * 1000, // cookie expiry: set to match RT
   });
