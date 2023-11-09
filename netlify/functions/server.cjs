@@ -1,4 +1,5 @@
 require("express-async-errors");
+require("dotenv").config();
 const express = require("express");
 const { logger } = require("./middleware/logger.cjs");
 const { errorHandler } = require("./middleware/errorHandler.cjs");
