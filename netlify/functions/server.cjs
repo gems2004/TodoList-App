@@ -6,17 +6,21 @@ const { errorHandler } = require("./middleware/errorHandler.cjs");
 const { connectDB } = require("./config/dbConnect.cjs");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
+const corsOptions = require("./config/corsOptions.cjs");
+const cors = require("cors");
 const PORT = 3500;
 connectDB();
 
 const app = express();
 app.use(logger);
 
+// app.use(cors(corsOptions));
+
 app.use(express.json());
 
 app.use(cookieParser());
 
-// app.use("/", express.static(path.join(__dirname, "public")));
+// app.use("/", express.static(path.join(__dirname, "public"))); // Uncomment this if you want to use css files for html in "Views"
 app.use("/", require("./routes/root.cjs"));
 app.use("/auth", require("./routes/authRoutes.cjs"));
 app.use("/users", require("./routes/userRoutes.cjs"));

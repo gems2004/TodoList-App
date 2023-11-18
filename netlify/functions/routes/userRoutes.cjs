@@ -8,13 +8,10 @@ const {
 const { verifyJWT } = require("../middleware/verifyJWT.cjs");
 const router = express.Router();
 
+router.route("/").post(addNewUser);
+
 router.use(verifyJWT);
 
-router
-  .route("/")
-  .get(getAllUsers)
-  .post(addNewUser)
-  .patch(updateUser)
-  .delete(deleteUser);
+router.route("/").get(getAllUsers).patch(updateUser).delete(deleteUser);
 
 module.exports = router;
