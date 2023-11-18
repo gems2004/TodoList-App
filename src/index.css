@@ -1,69 +1,147 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+.h-screen {
+  height: 100vh;
 }
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
+.slider {
+  height: 1rem;
+  width: 100%;
+  background: rgba(128, 128, 128, 0.2);
+  border-radius: 9999px;
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  justify-content: space-evenly;
+  align-items: center;
+  z-index: -2;
+}
+.ball {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.5rem;
+  background: rgba(128, 128, 128);
+  border-radius: 9999px;
+  z-index: 0;
+}
+@keyframes example {
+  0% {
+    width: 0;
+    border-radius: 0;
+  }
+  75% {
+    border-radius: 100px;
+  }
+  100% {
+    width: 33%;
+  }
+}
+.quarter-blue {
+  animation: example 1s ease-in-out 0s 1 normal none;
+  background-color: #0d6efd;
+  border-radius: 9999px;
+  width: 33%;
+  position: absolute;
+  left: 0;
+  height: 100%;
+  z-index: -1;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+@keyframes blueball {
+  0% {
+    background-color: rgba(128, 128, 128);
+    color: black;
+  }
+  100% {
+    background-color: #0d6efd;
+    color: white;
+  }
+}
+.blue-ball {
+  animation: blueball 1s ease-in-out 1s 1 normal forwards;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.5rem;
+  background-color: rgba(128, 128, 128);
+  color: black;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 9999px;
+  z-index: 0;
+}
+@keyframes half {
+  from {
+    width: 33%;
+  }
+  to {
+    width: 70%;
+  }
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
+.half-blue {
+  animation: half 1s ease-in-out 0s 1 normal none;
+  background-color: #0d6efd;
+  border-radius: 9999px;
+  width: 70%;
+  position: absolute;
+  left: 0;
+  height: 100%;
+  z-index: -1;
 }
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+@keyframes full {
+  from {
+    width: 70%;
+  }
+  to {
+    width: 100%;
+  }
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.full-blue {
+  animation: full 1s ease-in-out 0s 1 normal none;
+  background-color: #0d6efd;
+  border-radius: 9999px;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  height: 100%;
+  z-index: -1;
+}
+.ball-end {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.5rem;
+  background-color: #0d6efd;
+  color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 9999px;
+  z-index: 0;
+}
+.add-task {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 9999px;
+  font-size: 50px;
+}
+.react-calendar__tile {
+  border-radius: 99px;
+  height: 3.1rem;
+}
+.react-calendar__tile--now {
+  background: lightcoral !important;
+}
+.react-calendar__tile--active {
+  background-color: lightblue !important;
+
+  color: black !important;
+}
+.calendar-container {
+  background: rgb(138, 179, 255) !important;
+  z-index: 0;
+  padding-bottom: 15px;
+}
+.main-container {
+  position: relative;
+  bottom: 25px;
+}
+.hider {
+  padding-bottom: 0;
+  height: 0;
 }
