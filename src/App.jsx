@@ -4,6 +4,7 @@ import "./index.css";
 import Login from "./components/Login";
 import SignUp from "./components/signup/SignUp";
 import MainPage from "./pages/MainPage";
+import CompletedTodos from "./pages/CompletedTodos";
 function App() {
   return (
     <>
@@ -13,6 +14,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/mainpage" element={<MainPage />} />
+          <Route path="/mainpage/completed" element={<CompletedTodos />} />
         </Route>
       </Routes>
     </>

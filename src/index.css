@@ -145,3 +145,6 @@
   padding-bottom: 0;
   height: 0;
 }
+.cursor-pointer :hover {
+  cursor: pointer;
+}

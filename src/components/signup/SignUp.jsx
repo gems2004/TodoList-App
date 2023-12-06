@@ -1,10 +1,52 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NameForm from "./NameForm";
 import PasswordForm from "./PasswordForm";
+import { useCreateNewUserMutation } from "../../features/users/usersSlice";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const [counter, setCounter] = useState(1);
-  console.log(counter);
+  const [createNewUser, data] = useCreateNewUserMutation();
+  const navigate = useNavigate();
+  const [signUpData, setSignUpData] = useState({
+    email: "",
+    password: "",
+    firstName: "",
+    middleName: "",
+    lastName: "",
+  });
+  function handleSignUp() {
+    try {
+      createNewUser({
+        email: signUpData.email,
+        password: signUpData.password,
+        name: {
+          firstName: signUpData.firstName,
+          middleName: signUpData.middleName,
+          lastName: signUpData.lastName,
+        },
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  useEffect(() => {
+    if (counter == 3 && data.isSuccess) {
+      setTimeout(() => {
+        navigate(`/login`);
+      }, 1500);
+    }
+    if (data?.error?.status == 409) {
+      setCounter(1);
+    }
+  }, [data.isSuccess, counter, data?.error]);
+  const errorHandler =
+    data?.error?.status == 409 ? (
+      <div className="text-center text-danger">
+        email/username already in use
+      </div>
+    ) : undefined;
+
   return (
     <section className="container d-flex h-screen justify-content-center flex-column">
       <div className="h-75 w-100 container d-flex flex-column gap-4  shadow-lg rounded-5 justify-content-center">
@@ -50,10 +92,30 @@ const SignUp = () => {
           </div>
         </div>
         <span className="align-self-center fw-bolder fs-1">Sign Up:</span>
-
-        {counter == 1 && <NameForm counter={counter} setCounter={setCounter} />}
-        {(counter == 2 || counter == 3) && (
-          <PasswordForm counter={counter} setCounter={setCounter} />
+        {errorHandler}
+        {counter == 1 && (
+          <NameForm
+            counter={counter}
+            setCounter={setCounter}
+            signUpData={signUpData}
+            setSignUpData={setSignUpData}
+            data={data}
+          />
+        )}
+        {counter == 2 && (
+          <PasswordForm
+            counter={counter}
+            setCounter={setCounter}
+            signUpData={signUpData}
+            setSignUpData={setSignUpData}
+            handleSignUp={handleSignUp}
+            data={data}
+          />
+        )}
+        {counter == 3 && data.isSuccess == true && (
+          <div className="d-flex justify-content-center">
+            Redirecting To LogIn
+          </div>
         )}
       </div>
     </section>
