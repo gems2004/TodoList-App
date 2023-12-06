@@ -11,6 +11,13 @@ export const extendedUsersApiSlice = usersApi.injectEndpoints({
         body: initialPost,
       }),
     }),
+    updateUserData: builder.mutation({
+      query: (initialPost) => ({
+        url: `/users`,
+        method: "PATCH",
+        body: initialPost,
+      }),
+    }),
     getUser: builder.query({
       query: () => ({
         url: `/users`,
@@ -20,6 +27,7 @@ export const extendedUsersApiSlice = usersApi.injectEndpoints({
           return {
             id: item._id,
             email: item.email,
+            name: item.name,
           };
         });
       },
@@ -27,6 +35,13 @@ export const extendedUsersApiSlice = usersApi.injectEndpoints({
     authLogin: builder.mutation({
       query: (initialPost) => ({
         url: `/auth`,
+        method: "POST",
+        body: initialPost,
+      }),
+    }),
+    authLogOut: builder.mutation({
+      query: (initialPost) => ({
+        url: `/auth/logout`,
         method: "POST",
         body: initialPost,
       }),
@@ -43,4 +58,6 @@ export const {
   useAuthLoginMutation,
   useAuthTokenRefreshQuery,
   useLazyGetUserQuery,
+  useUpdateUserDataMutation,
+  useAuthLogOutMutation,
 } = extendedUsersApiSlice;

@@ -23,7 +23,7 @@ const Login = () => {
         password: login.password,
       });
     } catch (err) {
-      console.log(err);
+      err;
     }
   }
 
@@ -42,8 +42,8 @@ const Login = () => {
         Check your email/username or password and try again
       </div>
     ) : undefined;
-  console.log(errorHandler);
-  console.log(data?.error?.status);
+  errorHandler;
+  data?.error?.status;
   const formValidator = login.email.length >= 3 && login.password.length >= 8;
   return (
     <section className="container d-flex h-screen justify-content-center flex-column">

@@ -16,6 +16,7 @@ import { getToken, getUserData } from "../features/users/tokenSlice";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import BottomNav from "../components/BottomNav";
+import UserTray from "../components/user/UserTray";
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -23,12 +24,12 @@ const MainPage = () => {
   const [actions, setActions] = useState({
     addTask: false,
     calender: false,
+    userInfo: false,
   });
   const state = useSelector((state) => state.token);
   const dateSelector = useSelector((state) => state.date);
   const token = useAuthTokenRefreshQuery();
   const [trigger, { data: todo }] = useLazyGetAllTodoQuery();
-  console.log(todo);
   const [triggerUser, { data: userData }] = useLazyGetUserQuery();
   const thisUser = userData?.find((item) => {
     if (item.email === state.userData.UserInfo.email) {
@@ -56,7 +57,7 @@ const MainPage = () => {
       navigate("/");
     }
   }, [token, dateSelector.isoDate]);
-  console.log(dateSelector);
+
   const nowDate = new Date();
   const title =
     dateSelector.year !== nowDate.getFullYear() ? (
@@ -67,17 +68,17 @@ const MainPage = () => {
     ) : dateSelector.year == nowDate.getFullYear() ? (
       <span>{`${dateSelector.month}\\${dateSelector.day}`}</span>
     ) : undefined;
-
-  console.log({
-    nowYear: nowDate.getFullYear(),
-    nowMonth: nowDate.getMonth() + 1,
-    nowDay: nowDate.getDate(),
-  });
+  console.log(userData);
   return (
     <>
       {actions.addTask && (
         <div className="position-fixed bg-black  bg-opacity-50 container-fluid">
           <AddTodo setActions={setActions} id={thisUser.id} />
+        </div>
+      )}
+      {actions.userInfo && (
+        <div className="position-fixed bg-black  bg-opacity-50 container-fluid">
+          <UserTray setActions={setActions} user={thisUser} />
         </div>
       )}
       <div
@@ -99,7 +100,16 @@ const MainPage = () => {
         <div className={`container h-100 pb-5  `}>
           <div className={`d-flex flex-column h-100 `}>
             <div className="align-self-center d-flex w-100 justify-content-between my-5 px-2 ">
-              <div>
+              <div
+                onClick={() => {
+                  setActions((prevState) => {
+                    return {
+                      ...prevState,
+                      userInfo: true,
+                    };
+                  });
+                }}
+              >
                 <ProfileIcon />
               </div>
               <div
@@ -135,17 +145,22 @@ const MainPage = () => {
                           });
                         }}
                       >
-                        <div className="m-2 py-2 d-flex align-items-center gap-2 ">
-                          <div
-                            style={{
-                              width: "1.5rem",
-                              height: "1.5rem",
-                              border: `1px solid black`,
-                              backgroundColor: item.completed ? "black" : "",
-                            }}
-                            className="rounded-5 "
-                          ></div>
-                          <h3>{item.title}</h3>
+                        <div className="m-2 py-2 d-flex align-items-center justify-content-between w-100 gap-2 ">
+                          <div className="d-flex align-items-center gap-2  ">
+                            <div
+                              style={{
+                                width: "1.5rem",
+                                height: "1.5rem",
+                                border: `1px solid black`,
+                                backgroundColor: item.completed ? "black" : "",
+                              }}
+                              className="rounded-5 "
+                            ></div>
+                            <div className="d-flex flex-column ">
+                              <span className="h2 m-0 ">{item.title}</span>
+                              <span className="h5 m-0 ">{item.text}</span>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     );

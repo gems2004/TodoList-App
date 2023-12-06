@@ -4,7 +4,6 @@ import { useAddNewTodoMutation } from "../../features/todos/todoSlice";
 
 function AddTodo({ setActions, id }) {
   const date = new Date();
-  date.setDate(date.getDate() + 3);
   const dateTime = date.toISOString().substring(0, 10);
   const [addTodoBody, setAddTodoBody] = useState({
     title: "",
@@ -34,7 +33,7 @@ function AddTodo({ setActions, id }) {
       });
     }
   }, [data.isSuccess]);
-  console.log(data);
+
   const formValidator =
     addTodoBody.title.length >= 3 && addTodoBody.description.length <= 30;
   return (

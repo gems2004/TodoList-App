@@ -45,7 +45,6 @@ function CompletedTodos() {
       navigate("/");
     }
   }, [token, todo]);
-  console.log(todo);
   return (
     <div className="my-4 ">
       <div className="d-flex  flex-column align-items-center container ">
