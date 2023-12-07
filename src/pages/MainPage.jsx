@@ -17,6 +17,7 @@ import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import BottomNav from "../components/BottomNav";
 import UserTray from "../components/user/UserTray";
+import Loader from "../assets/Loader";
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -29,7 +30,8 @@ const MainPage = () => {
   const state = useSelector((state) => state.token);
   const dateSelector = useSelector((state) => state.date);
   const token = useAuthTokenRefreshQuery();
-  const [trigger, { data: todo }] = useLazyGetAllTodoQuery();
+  const [trigger, { data: todo, isLoading: todoLoading, isFetching }] =
+    useLazyGetAllTodoQuery();
   const [triggerUser, { data: userData }] = useLazyGetUserQuery();
   const thisUser = userData?.find((item) => {
     if (item.email === state.userData.UserInfo.email) {
@@ -68,9 +70,16 @@ const MainPage = () => {
     ) : dateSelector.year == nowDate.getFullYear() ? (
       <span>{`${dateSelector.month}\\${dateSelector.day}`}</span>
     ) : undefined;
-  console.log(userData);
+  console.log(isFetching);
+  const loader = (
+    <div className="d-flex flex-column align-items-center blur-bg justify-content-center position-fixed vh-100 w-100  ">
+      <Loader />
+      <span className="h2">Loading...</span>
+    </div>
+  );
   return (
     <>
+      {isFetching || data.isLoading ? loader : undefined}
       {actions.addTask && (
         <div className="position-fixed bg-black  bg-opacity-50 container-fluid">
           <AddTodo setActions={setActions} id={thisUser.id} />
@@ -93,7 +102,7 @@ const MainPage = () => {
       <section
         className={
           actions.calender
-            ? "rounded-top-4 bg-light shadow-lg main-container "
+            ? "rounded-top-4 bg-white main-container"
             : "h-100 pb-5 "
         }
       >
@@ -169,7 +178,9 @@ const MainPage = () => {
               </div>
               <BottomNav
                 className={`position-fixed  bottom-0 w-100 shadow-lg rounded-top-5 ${
-                  actions.addTask == true || actions.moreInfoTray == true
+                  actions.addTask == true ||
+                  actions.moreInfoTray == true ||
+                  actions.userInfo == true
                     ? "visually-hidden"
                     : ""
                 }`}
@@ -183,5 +194,4 @@ const MainPage = () => {
     </>
   );
 };
-
 export default MainPage;

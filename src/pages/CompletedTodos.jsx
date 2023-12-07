@@ -13,11 +13,13 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { getToken, getUserData } from "../features/users/tokenSlice";
 import { jwtDecode } from "jwt-decode";
+import Loader from "../assets/Loader";
 
 function CompletedTodos() {
   const dispatch = useDispatch();
   const date = new Date().toISOString().substring(0, 10);
-  const [trigger, { data: todo }] = useLazyGetAllCompletedTodoTodayQuery();
+  const [trigger, { data: todo, isFetching }] =
+    useLazyGetAllCompletedTodoTodayQuery();
   const [triggerUser, { data: userData }] = useLazyGetUserQuery();
   const [triggerEditTodo, data] = useEditTodoMutation();
   const state = useSelector((state) => state.token);
@@ -45,9 +47,17 @@ function CompletedTodos() {
       navigate("/");
     }
   }, [token, todo]);
+  console.log(thisUserTodos);
+  const loader = (
+    <div className="d-flex flex-column align-items-center blur-bg justify-content-center position-fixed vh-100 w-100  ">
+      <Loader />
+      <span className="h2">Loading...</span>
+    </div>
+  );
   return (
-    <div className="my-4 ">
-      <div className="d-flex  flex-column align-items-center container ">
+    <div className="mb-5 pt-3">
+      {isFetching || data.isLoading ? loader : undefined}
+      <div className="d-flex  flex-column align-items-center container pb-5 ">
         <h1>Completed Todos:</h1>
         <div className="container w-100">
           {thisUserTodos?.map((item) => {
@@ -77,7 +87,10 @@ function CompletedTodos() {
                       }}
                       className="rounded-5 "
                     ></div>
-                    <h3>{item.title}</h3>
+                    <div className="d-flex flex-column">
+                      <del className="h3 m-0 ">{item.title}</del>
+                      <del className="h5 m-0 ">{item.text}</del>
+                    </div>
                   </div>
                 </div>
               );

@@ -5,7 +5,7 @@ function BottomNav({ setActions, className, home }) {
   const navigate = useNavigate();
   return (
     <div className={className}>
-      <div className="d-flex justify-content-between mx-4 align-items-end  py-2">
+      <div className="d-flex bg-white justify-content-between mx-4 align-items-end  py-2">
         <button
           className="btn"
           onClick={() => {
