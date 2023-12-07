@@ -70,7 +70,7 @@ const MainPage = () => {
     ) : dateSelector.year == nowDate.getFullYear() ? (
       <span>{`${dateSelector.month}\\${dateSelector.day}`}</span>
     ) : undefined;
-  console.log(isFetching);
+  console.log(todo);
   const loader = (
     <div className="d-flex flex-column align-items-center blur-bg justify-content-center position-fixed vh-100 w-100  ">
       <Loader />

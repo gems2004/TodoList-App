@@ -11,7 +11,11 @@ function CalenderContainer({ calender }) {
     year: date.getFullYear(),
     month: date.getMonth() + 1,
     day: date.getDate(),
-    dateIso: date.toISOString().substring(0, 10),
+    dateIso: `${date.getFullYear()}-${date.getMonth() + 1}-${
+      date.getDate().toString().length == 1
+        ? `0${date.getDate()}`
+        : date.getDate()
+    }`,
   };
   useEffect(() => {
     dispatch(
