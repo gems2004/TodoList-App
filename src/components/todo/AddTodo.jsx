@@ -7,7 +7,7 @@ function AddTodo({ setActions, id }) {
   const dateTime = date.toISOString().substring(0, 10);
   const [addTodoBody, setAddTodoBody] = useState({
     title: "",
-    description: "...",
+    description: "",
     dueDate: dateTime,
   });
   const [triggerAddTodo, data] = useAddNewTodoMutation();

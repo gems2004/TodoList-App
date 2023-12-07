@@ -55,11 +55,11 @@ function CompletedTodos() {
     </div>
   );
   return (
-    <div className="mb-5 pt-3">
+    <div className="mb-5 pt-3 vh-100 ">
       {isFetching || data.isLoading ? loader : undefined}
-      <div className="d-flex  flex-column align-items-center container pb-5 ">
+      <div className="d-flex  flex-column align-items-center container pb-5 h-100">
         <h1>Completed Todos:</h1>
-        <div className="container w-100">
+        <div className="container w-100 h-100">
           {thisUserTodos?.map((item) => {
             if (item.completed) {
               return (
@@ -96,6 +96,12 @@ function CompletedTodos() {
               );
             }
           })}
+          {thisUserTodos == 0 ? (
+            <div className="d-flex flex-column  align-items-center justify-content-center w-100 my-5 h-100">
+              <img src="/empty.jpg" width={350} alt="" />
+              <span className="h2">You didn't complete any todos</span>
+            </div>
+          ) : undefined}
         </div>
       </div>
       <BottomNav

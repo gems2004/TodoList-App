@@ -70,16 +70,17 @@ const MainPage = () => {
     ) : dateSelector.year == nowDate.getFullYear() ? (
       <span>{`${dateSelector.month}\\${dateSelector.day}`}</span>
     ) : undefined;
-  console.log(todo);
+  console.log(thisUserTodos);
   const loader = (
     <div className="d-flex flex-column align-items-center blur-bg justify-content-center position-fixed vh-100 w-100  ">
       <Loader />
       <span className="h2">Loading...</span>
     </div>
   );
+
   return (
     <>
-      {isFetching || data.isLoading ? loader : undefined}
+      {isFetching || todoLoading || data.isLoading ? loader : undefined}
       {actions.addTask && (
         <div className="position-fixed bg-black  bg-opacity-50 container-fluid">
           <AddTodo setActions={setActions} id={thisUser.id} />
@@ -175,6 +176,12 @@ const MainPage = () => {
                     );
                   }
                 })}
+                {thisUserTodos == 0 ? (
+                  <div className="d-flex flex-column  align-items-center justify-content-center w-100 my-5 pt-5  h-100">
+                    <img src="/empty.jpg" width={350} alt="" />
+                    <span className="h2">You don't have any todos</span>
+                  </div>
+                ) : undefined}
               </div>
               <BottomNav
                 className={`position-fixed  bottom-0 w-100 shadow-lg rounded-top-5 ${
