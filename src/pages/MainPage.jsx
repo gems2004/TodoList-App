@@ -55,11 +55,13 @@ const MainPage = () => {
       trigger({ date: dateSelector.isoDate });
       triggerUser();
     }
-    if (token?.error?.status == 401) {
-      navigate("/");
-    }
+    setTimeout(() => {
+      if (token?.error?.data.message == "Unauthorized") {
+        navigate("/");
+      }
+    }, 5000);
   }, [token, dateSelector.isoDate]);
-
+  console.log(token);
   const nowDate = new Date();
   const title =
     dateSelector.year !== nowDate.getFullYear() ? (
@@ -115,6 +117,7 @@ const MainPage = () => {
                   setActions((prevState) => {
                     return {
                       ...prevState,
+                      calender: false,
                       userInfo: true,
                     };
                   });

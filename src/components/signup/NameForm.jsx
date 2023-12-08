@@ -18,7 +18,7 @@ const NameForm = ({ counter, setCounter, signUpData, setSignUpData }) => {
       >
         <div>
           <label htmlFor="fName" className="form-label">
-            First Name:
+            First Name:*
           </label>
           <input
             type="text"
@@ -54,7 +54,7 @@ const NameForm = ({ counter, setCounter, signUpData, setSignUpData }) => {
         </div>
         <div>
           <label htmlFor="email" className="form-label">
-            Email/Username:
+            Email/Username:*
           </label>
           <input
             type="text"

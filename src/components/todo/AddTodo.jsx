@@ -41,6 +41,7 @@ function AddTodo({ setActions, id }) {
       <div className="h-50  w-100 bg-white rounded-3 d-flex flex-column align-items-center ">
         <div className="d-flex align-items-center w-100  ">
           <h1 className="m-2 flex-grow-1 ">Add New Task:</h1>
+
           <div
             className="cursor-pointer "
             onClick={() => {
@@ -55,9 +56,12 @@ function AddTodo({ setActions, id }) {
             <X />
           </div>
         </div>
+        {data.isError ? (
+          <h2 className="text-danger ">all fields required</h2>
+        ) : undefined}
         <form
           onClick={(e) => e.preventDefault()}
-          className="container d-flex flex-column h-100 my-2"
+          className="container d-flex flex-column h-100 mb-2"
           onChange={(e) => {
             setAddTodoBody((prevState) => {
               return {
@@ -68,7 +72,7 @@ function AddTodo({ setActions, id }) {
           }}
         >
           <label htmlFor="title" className="fs-3 ">
-            Title:
+            Title:*
           </label>
           <input
             type="text"
@@ -79,7 +83,7 @@ function AddTodo({ setActions, id }) {
             value={addTodoBody.title}
           />
           <label htmlFor="description" className="fs-3 ">
-            Description:
+            Description:*
           </label>
           <input
             type="text"
@@ -89,7 +93,7 @@ function AddTodo({ setActions, id }) {
             value={addTodoBody.description}
           />
           <label htmlFor="dueDate" className="fs-3 ">
-            Due Date:
+            Due Date:*
           </label>
           <input
             type="date"

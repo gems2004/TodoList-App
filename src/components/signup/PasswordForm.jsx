@@ -28,7 +28,7 @@ const PasswordForm = ({
       <form className="h-50">
         <div className="mb-2">
           <label htmlFor="fName" className="form-label">
-            Password
+            Password:*
           </label>
           <input
             type="text"
@@ -48,7 +48,7 @@ const PasswordForm = ({
         </div>
         <div>
           <label htmlFor="lName" className="form-label">
-            Confirm Password
+            Confirm Password:*
           </label>
           <input
             type="text"
@@ -70,6 +70,15 @@ const PasswordForm = ({
         }}
       >
         {data.status == "pending" ? "Please Wait" : "Sign Up"}
+      </button>
+      <button
+        type="button"
+        className="btn btn-light"
+        onClick={() => {
+          setCounter(1);
+        }}
+      >
+        Go Back
       </button>
     </>
   );
