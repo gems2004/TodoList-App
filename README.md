@@ -12,12 +12,12 @@ This repository contains the code for a TodoList App Website built using Vite, R
 - MongoDB
 
 ## Acknowledgements
-- The project makes use of the following open-source libraries and technologies:
-  - Vite
-  - React
-  - Redux Toolkit
-  - Node.js
-  - Express.js
-  - MongoDB
+ The project makes use of the following open-source libraries and technologies:
+ - Vite
+ - React
+ - Redux Toolkit
+ - Node.js
+ - Express.js
+ - MongoDB
 
 Feel free to explore the code and contribute to the project!
