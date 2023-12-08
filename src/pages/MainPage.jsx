@@ -56,12 +56,15 @@ const MainPage = () => {
       triggerUser();
     }
     setTimeout(() => {
-      if (token?.error?.data.message == "Unauthorized") {
+      if (
+        token?.error?.data.message == "Unauthorized" &&
+        state.token == false
+      ) {
         navigate("/");
       }
     }, 5000);
   }, [token, dateSelector.isoDate]);
-  console.log(token);
+
   const nowDate = new Date();
   const title =
     dateSelector.year !== nowDate.getFullYear() ? (
