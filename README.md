@@ -1,8 +1,23 @@
-# React + Vite
+# TodoList App Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repository contains the code for a TodoList App Website built using Vite, React 18, and Redux Toolkit for state management. The app utilizes advanced RTK for fetching data for the frontend. For the backend, Node.js and Express.js are used, with MongoDB as the database.
 
-Currently, two official plugins are available:
+## Technologies Used
+- Vite
+- React 18
+- Redux Toolkit
+- Advanced RTK
+- Node.js
+- Express.js
+- MongoDB
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Acknowledgements
+- The project makes use of the following open-source libraries and technologies:
+  - Vite
+  - React
+  - Redux Toolkit
+  - Node.js
+  - Express.js
+  - MongoDB
+
+Feel free to explore the code and contribute to the project!
